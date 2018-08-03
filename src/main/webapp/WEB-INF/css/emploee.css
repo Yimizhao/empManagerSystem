@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.BodyCSS {
+	background: Beige;
+	height: 780px;
+	width: 1350px;
+	font-size: 10pt;
+	font-family: 'Meiryo';
+}
+
+.headerCss {
+	background: transparent;
+	width: 350px;
+	color: MediumBlue;
+	border-bottom: 0px;
+	left: 200px;
+}
+
+h1, .h1 {
+	font-size: 44px;
+}

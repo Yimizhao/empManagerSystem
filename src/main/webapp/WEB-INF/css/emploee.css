@@ -19,3 +19,15 @@
 h1, .h1 {
 	font-size: 44px;
 }
+
+.theadCss {
+	background-color: palegreen;
+}
+
+thead th {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 19px;
+	padding: 0 8px 2px;
+	text-align: center;
+}

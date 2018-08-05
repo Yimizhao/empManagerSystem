@@ -10,10 +10,14 @@ AIR.emploee.select = function() {
 	var METHODNAME = "AIR.emploee.select";
 	var label = 0;
 	try {
-		alert("欢迎！请按“确定”继续。");
-	} catch (err) {
+		// var empIdFrom = $("#empIdFrom").val();
+		var pageContext = $("#pageContext").val();
+		var newUrl = pageContext + "/getEmp";
+		$("#empForm").attr('action', newUrl);
+		$("#empForm").submit();
 		
+	} catch (err) {
+
 	}
 
-	return;
 };

@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ems.dao.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="com.ems.bean.Employee">
-    <id column="emp_id" jdbcType="INTEGER" property="empId" />
-    <result column="emp_name" jdbcType="VARCHAR" property="empName" />
-    <result column="gender" jdbcType="CHAR" property="gender" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="d_id" jdbcType="INTEGER" property="dId" />
-  </resultMap>
+	<resultMap id="BaseResultMap" type="com.ems.bean.Employee">
+		<id column="emp_id" jdbcType="INTEGER" property="empId" />
+		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
+		<result column="gender" jdbcType="CHAR" property="gender" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="d_id" jdbcType="INTEGER" property="dId" />
+	</resultMap>
+	<resultMap id="BaseResultMapWithDep" type="com.ems.bean.Employee">
+		<id column="emp_id" jdbcType="INTEGER" property="empId" />
+		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
+		<result column="gender" jdbcType="CHAR" property="gender" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="d_id" jdbcType="INTEGER" property="dId" />
+		<association property="department" javaType="com.ems.bean.Department">
+			<id column="dept_id" jdbcType="INTEGER" property="deptId" />
+			<result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+		</association>
+	</resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,6 +80,9 @@
   <sql id="Base_Column_List">
     emp_id, emp_name, gender, email, d_id
   </sql>
+  <sql id="Base_Column_Dept_List">
+    e.emp_id, e.emp_name, e.gender, e.email, d.dept_id,d.dept_name
+  </sql>
   <select id="selectByExample" parameterType="com.ems.bean.EmployeeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -89,6 +103,14 @@
     from tbl_emp
     where emp_id = #{empId,jdbcType=INTEGER}
   </select>
+	<select id="selectWithDepByEmpId" resultMap="BaseResultMapWithDep">
+		select
+		<include refid="Base_Column_Dept_List" />
+		from tbl_emp e
+		LEFT JOIN tbl_dept d
+		ON e.d_id=d.dept_id
+		where emp_id BETWEEN #{empIdFrom,jdbcType=INTEGER} AND #{empIdTo,jdbcType=INTEGER}
+	</select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_emp
     where emp_id = #{empId,jdbcType=INTEGER}

@@ -25,7 +25,7 @@
 <link href="${APP_PATH }/css/emploee.css" rel="stylesheet">
 </head>
 <body class="BodyCSS">
-	<form id="empFrom">
+	<form id="empForm" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="page-header col-md-12 headerCss">
@@ -34,14 +34,50 @@
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<span>员工ID</span><input type="text" id="empIdFrom" name="empIdFrom"><span>~</span><input
-						id="empIdTo" name="empIdTo">
+					<span>员工ID</span><input type="text" id="empIdFrom" name="empFrom"><span>~</span><input
+						id="empIdTo" name="empTo">
 				</div>
 				<div class="col-md-4">
-					<input type="button" id="select" value="检索" onclick="nameSpace.select();">
+					<input type="button" id="select" class="btn btn-success" value="检索"
+						onclick="nameSpace.select();">
+				</div>
+				<br> <br>
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th><input type="checkbox" id="allCheck"></th>
+									<th>员工ID</th>
+									<th>员工姓名</th>
+									<th>性别</th>
+									<th>邮箱</th>
+									<th>部门</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${ emps}" var="emp">
+									<tr>
+										<td>${ emp.no}</td>
+										<td><input type="checkbox" id="rowCheck"></td>
+										<td>${ emp.empId}</td>
+										<td>${ emp.empName}</td>
+										<td>${ emp.gender}</td>
+										<td>${ emp.email}</td>
+										<td>${ emp.deptName}</td>
+									</tr>
+
+								</c:forEach>
+							</tbody>
+
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
+		<!-- 		<input type="submit" id="selectHidden" style="display: none;"> -->
+		<input type="hidden" id="pageContext" value="${APP_PATH }">
 	</form>
 </body>
 </html>

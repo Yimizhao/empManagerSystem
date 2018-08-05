@@ -1,53 +1,64 @@
 package com.ems.bean;
 
 public class Employee {
-    private Integer empId;
+	private Integer empId;
 
-    private String empName;
+	private String empName;
 
-    private String gender;
+	private String gender;
 
-    private String email;
+	private String email;
 
-    private Integer dId;
+	private Integer dId;
 
-    public Integer getEmpId() {
-        return empId;
-    }
+	private Department department;
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
-    }
+	public Integer getEmpId() {
+		return empId;
+	}
 
-    public String getEmpName() {
-        return empName;
-    }
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
 
-    public void setEmpName(String empName) {
-        this.empName = empName == null ? null : empName.trim();
-    }
+	public String getEmpName() {
+		return empName;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public void setEmpName(String empName) {
+		this.empName = empName == null ? null : empName.trim();
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender == null ? null : gender.trim();
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setGender(String gender) {
+		this.gender = gender == null ? null : gender.trim();
+	}
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Integer getdId() {
-        return dId;
-    }
+	public void setEmail(String email) {
+		this.email = email == null ? null : email.trim();
+	}
 
-    public void setdId(Integer dId) {
-        this.dId = dId;
-    }
+	public Integer getdId() {
+		return dId;
+	}
+
+	public void setdId(Integer dId) {
+		this.dId = dId;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	
 }

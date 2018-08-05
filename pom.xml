@@ -41,11 +41,13 @@
 			<version>5.1.38</version>
 		</dependency>
 		<!-- 数据源 -->
+		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
 		<dependency>
-			<groupId>c3p0</groupId>
+			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
+			<version>0.9.5.2</version>
 		</dependency>
+
 
 
 		<!-- 测试Junit -->

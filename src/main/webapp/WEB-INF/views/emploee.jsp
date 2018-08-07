@@ -41,42 +41,72 @@
 					<input type="button" id="select" class="btn btn-success" value="检索"
 						onclick="nameSpace.select();">
 				</div>
-				<br> <br>
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-bordered table-hover">
-							<thead class="theadCss">
+			</div>
+			<br> <br>
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-bordered table-hover">
+						<thead class="theadCss">
+							<tr>
+								<th>No</th>
+								<th><input type="checkbox" id="allCheck"></th>
+								<th>员工ID</th>
+								<th>员工姓名</th>
+								<th>性别</th>
+								<th>邮箱</th>
+								<th>部门</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${ emps}" var="emp">
 								<tr>
-									<th>No</th>
-									<th><input type="checkbox" id="allCheck"></th>
-									<th>员工ID</th>
-									<th>员工姓名</th>
-									<th>性别</th>
-									<th>邮箱</th>
-									<th>部门</th>
+									<td>${ emp.no}</td>
+									<td><input type="checkbox" id="rowCheck"></td>
+									<td>${ emp.empId}</td>
+									<td>${ emp.empName}</td>
+									<td>${ emp.gender}</td>
+									<td>${ emp.email}</td>
+									<td>${ emp.deptName}</td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${ emps}" var="emp">
-									<tr>
-										<td>${ emp.no}</td>
-										<td><input type="checkbox" id="rowCheck"></td>
-										<td>${ emp.empId}</td>
-										<td>${ emp.empName}</td>
-										<td>${ emp.gender}</td>
-										<td>${ emp.email}</td>
-										<td>${ emp.deptName}</td>
-									</tr>
 
-								</c:forEach>
-							</tbody>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<!--分页文字信息  -->
+				<div class="col-md-6">当前 ${pageInfo.pageNum }页,总${pageInfo.pages } 页,总
+					${pageInfo.total } 条记录</div>
+				<div class="col-md-6">
+					<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li><a href="${APP_PATH }/getEmp?pn=1">首页</a></li>
+						<c:if test="${pageInfo.hasPreviousPage }">
+							<li><a href="${APP_PATH }/getEmp?pn=${pageInfo.pageNum-1}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+						</c:if>
+						<c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+							<c:if test="${page_Num == pageInfo.pageNum }">
+								<li class="active"><a href="#">${page_Num }</a></li>
+							</c:if>
+							<c:if test="${page_Num != pageInfo.pageNum }">
+								<li><a href="${APP_PATH }/getEmp?pn=${page_Num }">${page_Num }</a></li>
+							</c:if>
 
-						</table>
-					</div>
+						</c:forEach>
+						<c:if test="${pageInfo.hasNextPage }">
+							<li><a href="${APP_PATH }/getEmp?pn=${pageInfo.pageNum+1 }"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</c:if>
+						<li><a href="${APP_PATH }/getEmp?pn=${pageInfo.pages}">末页</a></li>
+					</ul>
+					</nav>
 				</div>
 			</div>
 		</div>
-		<!-- 		<input type="submit" id="selectHidden" style="display: none;"> -->
 		<input type="hidden" id="pageContext" value="${APP_PATH }">
 	</form>
 </body>

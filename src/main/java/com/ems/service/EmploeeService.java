@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.ems.Utils.IntegerUtils;
 import com.ems.bean.Employee;
 import com.ems.dao.EmployeeMapper;
 import com.ems.dto.EmploeeDto;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class EmploeeService {
@@ -17,11 +20,11 @@ public class EmploeeService {
 	@Autowired
 	EmployeeMapper employeeMapper;
 
-	public List<EmploeeDto> getEmpInfo(String empFrom, String empTo) {
+	public List<EmploeeDto> getEmpInfo(String empFrom, String empTo, Integer currentPageNumber, Model model) {
 		List<EmploeeDto> empList = new ArrayList<EmploeeDto>();
 
-		List<Employee> selectWithDepByEmpId = employeeMapper.selectWithDepByEmpId(IntegerUtils.toInteger(empFrom),
-				IntegerUtils.toInteger(empTo));
+		PageHelper.startPage(currentPageNumber, 15);
+		List<Employee> selectWithDepByEmpId = employeeMapper.selectWithDepByEmpId(IntegerUtils.toInteger(empFrom), IntegerUtils.toInteger(empTo));
 		EmploeeDto emploeeDto = null;
 		int no = 1;
 		for (Employee employee : selectWithDepByEmpId) {
@@ -29,6 +32,8 @@ public class EmploeeService {
 			empList.add(emploeeDto);
 			no++;
 		}
+		PageInfo<Employee> page = new PageInfo<Employee>(selectWithDepByEmpId,15);
+		model.addAttribute("pageInfo", page);
 		return empList;
 	}
 	

@@ -1,7 +1,9 @@
 package com.ems.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,27 +37,17 @@ public class EmploeeManager {
 		model.addAttribute("empTo", form.getEmpTo());
 		return "emploee";
 	}
-//	@RequestMapping(value = "/getEmp", method = RequestMethod.POST)
-//	public String getEmp(@RequestParam("empFrom") String empFrom, @RequestParam("empTo") String empTo, @RequestParam(value="pn",defaultValue = "1",required=false) Integer currentPageNumber, Model model) {
-//		PageHelper.startPage(currentPageNumber, 20);
-//		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
-//		
-//		model.addAttribute("emps", empList);
-//		model.addAttribute("empFrom", empFrom);
-//		model.addAttribute("empTo", empTo);
-//		return "emploee";
-//	}
+
 	
 	@RequestMapping(value = "/deleteEmp", method = RequestMethod.POST)
-	public String deleteEmp(EmploeeForm form) {
-//		PageHelper.startPage(currentPageNumber, 20);
-//		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
-//		
-//		model.addAttribute("emps", empList);
-//		model.addAttribute("empFrom", empFrom);
-//		model.addAttribute("empTo", empTo);
-		System.out.println(form);
-		return "emploee";
+	public String deleteEmp(EmploeeForm form,Model model) {
+		String deleteString = form.getDeleteList();
+		if (!StringUtils.isBlank(deleteString)) {
+			List<String> deleteIdlist = Arrays.asList(deleteString.split(","));
+			emploeeService.deleteEmploee(deleteIdlist);
+		}
+		
+		return this.getEmp(form, model);
 	}
 
 }

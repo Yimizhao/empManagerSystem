@@ -106,7 +106,7 @@
 			<div class="row">
 				<div class="col-md-8"></div>
 				<div class="col-md-4">
-					<button type="button" class="btn btn-danger" aria-label="Left Align" value="删除" onclick="nameSpace.deleteItems(this)">
+					<button type="button" class="btn btn-info" aria-label="Left Align" value="删除" onclick="nameSpace.deleteItems()">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true">删除</span>
 					</button>
 				</div>

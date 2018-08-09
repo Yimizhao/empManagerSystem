@@ -9,15 +9,10 @@ AIR.emploee.select = function() {
 	var METHODNAME = "AIR.emploee.select";
 	var label = 0;
 	try {
-		// var empIdFrom = $("#empIdFrom").val();
-//		var pageContext = $("#pageContext").val();
-//		var newUrl = pageContext + "/getEmp";
-//		$("#empForm").attr('action', newUrl);
-//		$("#empForm").submit();
 		nameSpace.formSubmit("/getEmp");
 
 	} catch (err) {
-
+		alert(err);
 	}
 
 };
@@ -27,15 +22,10 @@ AIR.emploee.toPage = function(item) {
 	var label = 0;
 	try {
 		document.getElementById("pnHiden").value = item.id;
-//		var pageContext = $("#pageContext").val();
-//		var newUrl = pageContext + "/getEmp";
-//		$("#empForm").removeAttr("action");
-//		$("#empForm").attr('action', newUrl);
-//		$("#empForm").submit();
 		nameSpace.formSubmit("/getEmp");
 
 	} catch (err) {
-
+		alert(err);
 	}
 };
 AIR.emploee.selectCheckAll = function(item) {
@@ -57,10 +47,11 @@ AIR.emploee.selectCheckAll = function(item) {
 			}
 		}
 	} catch (err) {
-
+		alert(err);
 	}
 };
-AIR.emploee.deleteItems = function(item) {
+
+AIR.emploee.deleteItems = function() {
 
 	var METHODNAME = "AIR.emploee.deleteItems";
 	var label = 0;
@@ -75,18 +66,19 @@ AIR.emploee.deleteItems = function(item) {
 		for (var i = 0; i < rowItems.length; i++) {
 
 			if (rowItems[i].children[1].children[0].checked) {
-				deleteList = deleteList + "," + rowItems[i].children[2].textContent;
+				deleteList = deleteList + ","
+						+ rowItems[i].children[2].textContent;
 			}
 		}
-		
+
 		if (deleteList === "") {
 			return;
 		}
-		document.getElementById("deleteList").value = deleteList;
-		
+		document.getElementById("deleteHiden").value = deleteList;
+		document.getElementById("pnHiden").value = "1";
 		nameSpace.formSubmit("/deleteEmp");
-		
 	} catch (err) {
+		alert(err);
 
 	}
 };
@@ -102,6 +94,6 @@ AIR.emploee.formSubmit = function(item) {
 		$("#empForm").attr('action', newUrl);
 		$("#empForm").submit();
 	} catch (err) {
-
+		alert(err);
 	}
 };

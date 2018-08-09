@@ -61,7 +61,7 @@
 							<c:forEach items="${ emps}" var="emp">
 								<tr>
 									<td>${ emp.no}</td>
-									<td><input type="checkbox" id="rowCheck"></td>
+									<td><input type="checkbox" id="rowCheck" onclick="nameSpace.selectCheck(this)"></td>
 									<td>${ emp.empId}</td>
 									<td>${ emp.empName}</td>
 									<td>${ emp.gender}</td>
@@ -106,7 +106,7 @@
 			<div class="row">
 				<div class="col-md-8"></div>
 				<div class="col-md-4">
-					<button type="button" class="btn btn-info" aria-label="Left Align" value="删除" onclick="nameSpace.deleteItems()">
+					<button type="button" class="btn btn-danger btn-primary btn-lg" aria-label="Left Align" value="删除" onclick="nameSpace.deleteItems()" id="deleteBtn" disabled="true">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true">删除</span>
 					</button>
 				</div>

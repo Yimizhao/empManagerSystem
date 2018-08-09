@@ -46,6 +46,38 @@ AIR.emploee.selectCheckAll = function(item) {
 				rowItems[i].children[1].children[0].checked = item.checked;
 			}
 		}
+		if (item.checked) {
+			document.getElementById("deleteBtn").disabled = false;
+		} else {
+			document.getElementById("deleteBtn").disabled = true;
+
+		}
+	} catch (err) {
+		alert(err);
+	}
+};
+AIR.emploee.selectCheck = function(item) {
+
+	var METHODNAME = "AIR.emploee.selectCheck";
+	var label = 0;
+	try {
+		document.getElementById("allCheck").checked = false;
+		if (item.checked) {
+			document.getElementById("deleteBtn").disabled = false;
+		} else {
+			
+			document.getElementById("deleteBtn").disabled = true;
+			var tableObj = document.getElementById("empBody")
+
+			var rowItems = tableObj.getElementsByTagName("tr");
+			for (var i = 0; i < rowItems.length; i++) {
+
+				if (rowItems[i].children[1].children[0].checked) {
+					document.getElementById("deleteBtn").disabled = false;
+					break;
+				}
+			}
+		}
 	} catch (err) {
 		alert(err);
 	}

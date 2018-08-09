@@ -62,20 +62,22 @@ AIR.emploee.selectCheck = function(item) {
 	var label = 0;
 	try {
 		document.getElementById("allCheck").checked = false;
-		if (item.checked) {
-			document.getElementById("deleteBtn").disabled = false;
-		} else {
-			
-			document.getElementById("deleteBtn").disabled = true;
-			var tableObj = document.getElementById("empBody")
+		var checkCount = 0;
+		document.getElementById("updataBtn").disabled = true;
+		document.getElementById("deleteBtn").disabled = true;
+		var tableObj = document.getElementById("empBody")
 
-			var rowItems = tableObj.getElementsByTagName("tr");
-			for (var i = 0; i < rowItems.length; i++) {
+		var rowItems = tableObj.getElementsByTagName("tr");
+		for (var i = 0; i < rowItems.length; i++) {
 
-				if (rowItems[i].children[1].children[0].checked) {
-					document.getElementById("deleteBtn").disabled = false;
-					break;
-				}
+			if (rowItems[i].children[1].children[0].checked) {
+				document.getElementById("deleteBtn").disabled = false;
+				document.getElementById("updataBtn").disabled = false;
+				checkCount++;
+			}
+			if (checkCount > 1) {
+				document.getElementById("updataBtn").disabled = true;
+				break;
 			}
 		}
 	} catch (err) {
@@ -112,6 +114,46 @@ AIR.emploee.deleteItems = function() {
 	} catch (err) {
 		alert(err);
 
+	}
+};
+AIR.emploee.updataItems = function() {
+	
+	var METHODNAME = "AIR.emploee.UpdataItems";
+	var label = 0;
+	try {
+		var tableObj = document.getElementById("empBody");
+
+		var rowItems = tableObj.getElementsByTagName("tr");
+		var empid;
+		var empName;
+		var gender;
+		var email;
+		var deptName;
+		for (var i = 0; i < rowItems.length; i++) {
+
+			if (rowItems[i].children[1].children[0].checked) {
+				empid = rowItems[i].children[2].textContent;
+				empName = rowItems[i].children[3].textContent;
+				gender = rowItems[i].children[4].textContent;
+				email = rowItems[i].children[5].textContent;
+				deptName = rowItems[i].children[6].textContent;
+				break;
+			}
+	
+		}
+		
+		document.getElementById("empID_update_static").value = empid;
+		document.getElementById("empName_update_input").value = empName;
+		document.getElementById("email_update_input").value = email;
+		if (gender === "男") {
+			document.getElementById("gender1_update_input").checked = true;
+		} else {
+			document.getElementById("gender2_update_input").checked = true;
+		}
+		$('#empUpdateModal').modal('show');
+	} catch (err) {
+		alert(METHODNAME + err);
+		
 	}
 };
 

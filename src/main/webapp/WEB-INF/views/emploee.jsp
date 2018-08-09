@@ -34,8 +34,8 @@
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<span>员工ID</span><input type="text" id="empIdFrom" name="empFrom"><span>~</span><input
-						id="empIdTo" name="empTo">
+					<span>员工ID</span><input type="text" id="empIdFrom" name="empFrom" value="${empFrom }"><span>~</span><input
+						id="empIdTo" name="empTo" value="${empTo }">
 				</div>
 				<div class="col-md-4">
 					<input type="button" id="select" class="btn btn-success" value="检索"
@@ -76,37 +76,35 @@
 			</div>
 			<div class="row">
 				<!--分页文字信息  -->
-				<div class="col-md-6">当前 ${pageInfo.pageNum }页,总${pageInfo.pages } 页,总
-					${pageInfo.total } 条记录</div>
+				<div class="col-md-6">当前 ${pageInfo.pageNum }页,总${pageInfo.pages }
+					页,总 ${pageInfo.total } 条记录</div>
 				<div class="col-md-6">
 					<nav aria-label="Page navigation">
 					<ul class="pagination">
-						<li><a href="${APP_PATH }/getEmp?pn=1">首页</a></li>
+						<li><a href="javascript:void(0)" onclick="nameSpace.toPage(this)" id="1">首页</a></li>
 						<c:if test="${pageInfo.hasPreviousPage }">
-							<li><a href="${APP_PATH }/getEmp?pn=${pageInfo.pageNum-1}"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
+							<li><a href="javascript:void(0)" onclick="nameSpace.toPage(this)" id="${pageInfo.pageNum -1 }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
 						</c:if>
 						<c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
 							<c:if test="${page_Num == pageInfo.pageNum }">
 								<li class="active"><a href="#">${page_Num }</a></li>
 							</c:if>
 							<c:if test="${page_Num != pageInfo.pageNum }">
-								<li><a href="${APP_PATH }/getEmp?pn=${page_Num }">${page_Num }</a></li>
+								<li><a href="javascript:void(0)" onclick="nameSpace.toPage(this)" id="${page_Num }">${page_Num }</a></li>
 							</c:if>
 
 						</c:forEach>
 						<c:if test="${pageInfo.hasNextPage }">
-							<li><a href="${APP_PATH }/getEmp?pn=${pageInfo.pageNum+1 }"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							<li><a href="javascript:void(0)" onclick="nameSpace.toPage(this)" id="${pageInfo.pageNum + 1 }" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
 						</c:if>
-						<li><a href="${APP_PATH }/getEmp?pn=${pageInfo.pages}">末页</a></li>
+						<li><a href="javascript:void(0)" onclick="nameSpace.toPage(this)" id="${pageInfo.pages}">末页</a></li>
 					</ul>
 					</nav>
 				</div>
 			</div>
 		</div>
+		<input type="text" name="pn" id="pnHiden" style="display: none;">
 		<input type="hidden" id="pageContext" value="${APP_PATH }">
 	</form>
 </body>

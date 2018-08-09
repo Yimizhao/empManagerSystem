@@ -24,12 +24,25 @@ public class EmploeeManager {
 		return "emploee";
 	}
 
-	@RequestMapping(value = "/getEmp/{pn}", method = {RequestMethod.POST,RequestMethod.GET})
-	public String getEmp(@RequestParam("empFrom") String empFrom, @RequestParam("empTo") String empTo, @RequestParam(value="pn",defaultValue = "1") Integer currentPageNumber, Model model) {
+	@RequestMapping(value = "/getEmp", method = RequestMethod.POST)
+	public String getEmp(@RequestParam("empFrom") String empFrom, @RequestParam("empTo") String empTo, @RequestParam(value="pn",defaultValue = "1",required=false) Integer currentPageNumber, Model model) {
 		PageHelper.startPage(currentPageNumber, 20);
 		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
 		
 		model.addAttribute("emps", empList);
+		model.addAttribute("empFrom", empFrom);
+		model.addAttribute("empTo", empTo);
+		return "emploee";
+	}
+	
+	@RequestMapping(value = "/getPageEmp", method = RequestMethod.GET)
+	public String getPageEmp(@RequestParam("empFrom") String empFrom, @RequestParam("empTo") String empTo, @RequestParam(value="pn",defaultValue = "1",required=false) Integer currentPageNumber, Model model) {
+		PageHelper.startPage(currentPageNumber, 20);
+		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
+		
+		model.addAttribute("emps", empList);
+		model.addAttribute("empFrom", empFrom);
+		model.addAttribute("empTo", empTo);
 		return "emploee";
 	}
 

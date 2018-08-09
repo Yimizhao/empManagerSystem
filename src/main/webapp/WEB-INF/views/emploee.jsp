@@ -46,10 +46,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-bordered table-hover">
-						<thead class="theadCss">
+						<thead class="theadCss" id="empThead">
 							<tr>
 								<th>No</th>
-								<th><input type="checkbox" id="allCheck"></th>
+								<th><input type="checkbox" id="allCheck" onclick="nameSpace.selectCheckAll(this)"></th>
 								<th>员工ID</th>
 								<th>员工姓名</th>
 								<th>性别</th>
@@ -57,7 +57,7 @@
 								<th>部门</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="empBody">
 							<c:forEach items="${ emps}" var="emp">
 								<tr>
 									<td>${ emp.no}</td>
@@ -103,8 +103,17 @@
 					</nav>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-8"></div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-danger" aria-label="Left Align" value="删除" onclick="nameSpace.deleteItems(this)">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true">删除</span>
+					</button>
+				</div>
+			</div>
 		</div>
 		<input type="text" name="pn" id="pnHiden" style="display: none;">
+		<input type="text" name="deleteList" id="deleteHiden" style="display: none;">
 		<input type="hidden" id="pageContext" value="${APP_PATH }">
 	</form>
 </body>

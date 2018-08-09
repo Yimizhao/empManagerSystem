@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ems.dto.EmploeeDto;
+import com.ems.form.EmploeeForm;
 import com.ems.service.EmploeeService;
 import com.github.pagehelper.PageHelper;
 
@@ -25,24 +26,35 @@ public class EmploeeManager {
 	}
 
 	@RequestMapping(value = "/getEmp", method = RequestMethod.POST)
-	public String getEmp(@RequestParam("empFrom") String empFrom, @RequestParam("empTo") String empTo, @RequestParam(value="pn",defaultValue = "1",required=false) Integer currentPageNumber, Model model) {
-		PageHelper.startPage(currentPageNumber, 20);
-		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
+	public String getEmp(EmploeeForm form, Model model) {
+		PageHelper.startPage(form.getPn(), 10);
+		List<EmploeeDto> empList = emploeeService.getEmpInfo(form.getEmpFrom(), form.getEmpTo(),model);
 		
 		model.addAttribute("emps", empList);
-		model.addAttribute("empFrom", empFrom);
-		model.addAttribute("empTo", empTo);
+		model.addAttribute("empFrom", form.getEmpFrom());
+		model.addAttribute("empTo", form.getEmpTo());
 		return "emploee";
 	}
+//	@RequestMapping(value = "/getEmp", method = RequestMethod.POST)
+//	public String getEmp(@RequestParam("empFrom") String empFrom, @RequestParam("empTo") String empTo, @RequestParam(value="pn",defaultValue = "1",required=false) Integer currentPageNumber, Model model) {
+//		PageHelper.startPage(currentPageNumber, 20);
+//		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
+//		
+//		model.addAttribute("emps", empList);
+//		model.addAttribute("empFrom", empFrom);
+//		model.addAttribute("empTo", empTo);
+//		return "emploee";
+//	}
 	
-	@RequestMapping(value = "/getPageEmp", method = RequestMethod.GET)
-	public String getPageEmp(@RequestParam("empFrom") String empFrom, @RequestParam("empTo") String empTo, @RequestParam(value="pn",defaultValue = "1",required=false) Integer currentPageNumber, Model model) {
-		PageHelper.startPage(currentPageNumber, 20);
-		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
-		
-		model.addAttribute("emps", empList);
-		model.addAttribute("empFrom", empFrom);
-		model.addAttribute("empTo", empTo);
+	@RequestMapping(value = "/deleteEmp", method = RequestMethod.POST)
+	public String deleteEmp(EmploeeForm form) {
+//		PageHelper.startPage(currentPageNumber, 20);
+//		List<EmploeeDto> empList = emploeeService.getEmpInfo(empFrom, empTo, currentPageNumber,model);
+//		
+//		model.addAttribute("emps", empList);
+//		model.addAttribute("empFrom", empFrom);
+//		model.addAttribute("empTo", empTo);
+		System.out.println(form);
 		return "emploee";
 	}
 

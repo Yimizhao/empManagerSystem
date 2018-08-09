@@ -20,10 +20,10 @@ public class EmploeeService {
 	@Autowired
 	EmployeeMapper employeeMapper;
 
-	public List<EmploeeDto> getEmpInfo(String empFrom, String empTo, Integer currentPageNumber, Model model) {
+	public List<EmploeeDto> getEmpInfo(String empFrom, String empTo, Model model) {
 		List<EmploeeDto> empList = new ArrayList<EmploeeDto>();
 
-		PageHelper.startPage(currentPageNumber, 15);
+//		PageHelper.startPage(currentPageNumber, 15);
 		List<Employee> selectWithDepByEmpId = employeeMapper.selectWithDepByEmpId(IntegerUtils.toInteger(empFrom), IntegerUtils.toInteger(empTo));
 		EmploeeDto emploeeDto = null;
 		int no = 1;
@@ -32,7 +32,7 @@ public class EmploeeService {
 			empList.add(emploeeDto);
 			no++;
 		}
-		PageInfo<Employee> page = new PageInfo<Employee>(selectWithDepByEmpId,15);
+		PageInfo<Employee> page = new PageInfo<Employee>(selectWithDepByEmpId,10);
 		model.addAttribute("pageInfo", page);
 		return empList;
 	}

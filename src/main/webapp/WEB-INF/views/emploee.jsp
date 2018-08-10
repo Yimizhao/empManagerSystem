@@ -121,7 +121,9 @@
 						id="deleteBtn" disabled="true">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true">删除</span>
 					</button>
-					<button type="button" class="btn btn-info btn-primary btn-lg" aria-label="Left Align" id="updataBtn" disabled="true" onclick="nameSpace.updataItems()">
+					<button type="button" class="btn btn-info btn-primary btn-lg"
+						aria-label="Left Align" id="updataBtn" disabled="true"
+						onclick="nameSpace.updataItems()">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true">修改</span>
 					</button>
 				</div>
@@ -132,8 +134,9 @@
 			style="display: none;"> <input type="hidden" id="pageContext"
 			value="${APP_PATH }">
 	</form>
-<!-- 员工修改的模态框 -->
-	<div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- 员工修改的模态框 -->
+	<div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -144,17 +147,19 @@
 					<h4 class="modal-title">员工修改</h4>
 				</div>
 				<div class="modal-body">
-					<form id="updataForm" class="form-horizontal">
+					<form id="updataForm" method="post" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">员工ID</label>
 							<div class="col-sm-10">
-								<input type="text" name="empId" class="form-control" id="empID_update_static" readonly="readonly">
+								<input type="text" name="empId" class="form-control"
+									id="empID_update_static" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">员工姓名</label>
 							<div class="col-sm-10">
-								<input type="text" name="empName" class="form-control" id="empName_update_input">
+								<input type="text" name="empName" class="form-control"
+									id="empName_update_input">
 							</div>
 						</div>
 						<div class="form-group">
@@ -180,7 +185,7 @@
 							<label class="col-sm-2 control-label">deptName</label>
 							<div class="col-sm-4">
 								<!-- 部门提交部门id即可 -->
-								<select class="form-control" name="dId">
+								<select class="form-control" name="dId" id="depSelectId">
 								</select>
 							</div>
 						</div>
@@ -188,7 +193,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="emp_update_btn">更新</button>
+					<button type="button" class="btn btn-primary" id="emp_update_btn"
+						onclick="nameSpace.updataEmp()">更新</button>
 				</div>
 			</div>
 		</div>

@@ -69,4 +69,22 @@ public class EmploeeService {
 		employeeMapper.deleteByExample(employeeExample);
 	}
 
+	public void updataEmployee(Employee employee) {
+		employeeMapper.updateByPrimaryKey(employee);
+		// 更新后再检索
+
+	}
+
+	public EmploeeDto getEmpbyPrimary(Integer empId) {
+		Employee emp = employeeMapper.selectByPrimaryKey(empId);
+		EmploeeDto emploeeDto = new EmploeeDto();
+		emploeeDto.setNo(1);
+		emploeeDto.setEmpId(emp.getEmpId());
+		emploeeDto.setEmpName(emp.getEmpName());
+		emploeeDto.setGender(emp.getGender());
+		emploeeDto.setEmail(emp.getEmail());
+		emploeeDto.setDeptName(emp.getdId() == 1 ? "开发部" : "测试部");
+		return emploeeDto;
+	}
+
 }

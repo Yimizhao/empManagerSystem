@@ -1,5 +1,6 @@
 package com.ems.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ems.bean.Employee;
 import com.ems.dto.EmploeeDto;
 import com.ems.form.EmploeeForm;
 import com.ems.service.EmploeeService;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 public class EmploeeManager {
@@ -48,6 +51,21 @@ public class EmploeeManager {
 		}
 		
 		return this.getEmp(form, model);
+	}
+	
+	@RequestMapping(value = "/updataEmp", method = RequestMethod.POST)
+	public String updataEmp(Employee employee,Model model) {
+		emploeeService.updataEmployee(employee);
+		EmploeeDto empbyPrimary = emploeeService.getEmpbyPrimary(employee.getEmpId());
+		List<EmploeeDto> empList = new ArrayList<EmploeeDto>();
+		empList.add(empbyPrimary);
+		PageInfo<Employee> page = null;
+		model.addAttribute("pageInfo", page);
+		
+		model.addAttribute("emps", empList);
+		model.addAttribute("empFrom", employee.getEmpId());
+		model.addAttribute("empTo", employee.getEmpId());
+		return "emploee";
 	}
 
 }

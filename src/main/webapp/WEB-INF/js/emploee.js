@@ -117,7 +117,7 @@ AIR.emploee.deleteItems = function() {
 	}
 };
 AIR.emploee.updataItems = function() {
-	
+
 	var METHODNAME = "AIR.emploee.UpdataItems";
 	var label = 0;
 	try {
@@ -139,9 +139,9 @@ AIR.emploee.updataItems = function() {
 				deptName = rowItems[i].children[6].textContent;
 				break;
 			}
-	
+
 		}
-		
+
 		document.getElementById("empID_update_static").value = empid;
 		document.getElementById("empName_update_input").value = empName;
 		document.getElementById("email_update_input").value = email;
@@ -150,10 +150,31 @@ AIR.emploee.updataItems = function() {
 		} else {
 			document.getElementById("gender2_update_input").checked = true;
 		}
+		// 获取部门信息
+		var pageContext = $("#pageContext").val();
+		$.ajax({
+			type : 'GET',
+			url : pageContext + "/getDep",
+			dataType : 'json',
+			success : function(result) {
+				$("#depSelectId option").remove();
+				for (var i = 0; i < result.length; i++) {
+					var depInfo = result[i];
+					if (deptName === depInfo.deptName) {
+						
+						$("#depSelectId").append("<option value='" + depInfo.deptId + "' selected = selected" + ">" + depInfo.deptName + "</option>");
+					} else {
+						$("#depSelectId").append("<option value='" + depInfo.deptId + "'>" + depInfo.deptName + "</option>");
+					}
+
+				}
+
+			}
+		})
 		$('#empUpdateModal').modal('show');
 	} catch (err) {
 		alert(METHODNAME + err);
-		
+
 	}
 };
 
@@ -169,5 +190,19 @@ AIR.emploee.formSubmit = function(item) {
 		$("#empForm").submit();
 	} catch (err) {
 		alert(err);
+	}
+};
+AIR.emploee.updataEmp = function() {
+	
+	var METHODNAME = "AIR.emploee.updataEmp";
+	var label = 0;
+	try {
+		var pageContext = $("#pageContext").val();
+		var newUrl = pageContext + "/updataEmp";
+		$("#updataForm").removeAttr("action");
+		$("#updataForm").attr('action', newUrl);
+		$("#updataForm").submit();
+	} catch (err) {
+		alert(METHODNAME + err);
 	}
 };
